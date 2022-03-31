@@ -43,7 +43,11 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
     if (this.trajetSearchForm.valid) {
       /// search trajet
       /// TODO
-      console.log(JSON.stringify(this.route));
+      let f = JSON.stringify(this.route);
+
+      f = f.replace(/\],\[/g,"rep").replace(/\[/g,"").replace(/\]/g,"").replace(/,/g,"&!&").replace(/rep/g, ",");
+
+      console.log(f);
     }
   }
 

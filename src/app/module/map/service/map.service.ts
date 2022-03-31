@@ -7,7 +7,6 @@ import { catchError, tap } from 'rxjs/operators';
 import { Location } from '../interface/map.interface';
 
 
-
 @Injectable({
     providedIn: 'root',
 })
