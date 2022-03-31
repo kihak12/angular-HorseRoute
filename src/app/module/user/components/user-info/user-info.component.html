@@ -1,0 +1,156 @@
+<app-search-bar></app-search-bar>
+<div class="container">
+    <div *ngIf="userDetails != null">
+        <div class="profil-head">
+            <h2>Profil de {{userDetails.pseudo}}</h2>
+        </div>
+        <div class="flex-content">
+            <div class="flex-left">
+                <div class="icon-line">
+                    <span class="material-icons">
+                        insert_invitation
+                    </span>
+                    <span>Inscrit depuis le {{userDetails.registerDate | date:'dd MMMM yyyy':'+0200':'fr'}}</span>
+                </div>
+                <div class="icon-line">
+                    <span class="material-icons">
+                        account_circle
+                    </span>
+                    <span>Pseudo : {{userDetails.pseudo }}</span>
+                </div>
+                <div class="icon-line">
+                    <span class="material-icons">
+                        face
+                    </span>
+                    <span>Nom/Prenom : {{userDetails.lastName}} {{userDetails.firstName}}</span>
+                </div>
+            </div>
+            <div class="flex-right">
+                <div style="display: flex; flex-direction: column;">
+                    <span>Id de l'utilisateur</span>
+                    <span>{{userDetails.userId}}</span>
+                </div>
+                <div>
+                    <div class="icon-line-right">
+                        <span>Contact</span>
+                        <span class="material-icons">
+                            alternate_email
+                        </span>
+                    </div>
+                    <div class="contact-details">
+                        <div class="icon-line">
+                            <span>{{userDetails.mail}}</span>
+                            <span class="material-icons">
+                                email
+                            </span>
+                        </div>
+                        <div class="icon-line">
+                            <span>{{userDetails.tel}}</span>
+                            <span class="material-icons">
+                                phone_iphone
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slider-container">
+            <h2 class="head-offre">Toutes les offres de {{userDetails.pseudo}} :</h2>
+            <div *ngIf="trajets.length != 0">
+                <div class="slider">
+                    <div class="navigation-wrapper">
+                        <div class="keen-slider keen-slider--vertical" #sliderRef>
+                            <div *ngFor="let trajet of trajets; let i = index">
+                                <div class="keen-slider__slide number-slide{{i+1}}">
+                                    <div class="item-card">
+                                        <div class="trajet-text"
+                                            (click)="SetPointOnMap(trajet.adresseStart, trajet.adresseEnd)">
+                                            <h4>{{trajet.adresseStart.adresse}}, {{trajet.adresseStart.city}},
+                                                {{trajet.adresseStart.country}}</h4>
+                                            <mat-icon aria-hidden="false" aria-label="south icon">south</mat-icon>
+                                            <h4>{{trajet.adresseEnd.adresse}}, {{trajet.adresseEnd.city}},
+                                                {{trajet.adresseEnd.country}}</h4>
+                                        </div>
+                                        <div class="trajet-date">
+                                            <mat-icon aria-hidden="false" aria-label="today icon">today</mat-icon>
+                                            <div *ngIf="trajet.dayFlexibility == 0">
+                                                <span>Le {{trajet.trajetDate | date:'dd MMMM yyyy':'+0200':'fr'}}</span>
+                                            </div>
+                                            <div *ngIf="trajet.dayFlexibility != 0">
+                                                <span>Du {{getDateFlexibility(trajet.trajetDate, trajet.dayFlexibility)}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="trajet-date">
+                                            <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="32px"
+                                                height="32px" viewBox="0 0 64 64" preserveAspectRatio="xMidYMid meet">
+                                                <metadata>
+                                                    Created by potrace 1.15, written by Peter Selinger 2001-2017
+                                                </metadata>
+                                                <g transform="translate(0.000000,64.000000) scale(0.100000,-0.100000)"
+                                                    fill="#000000" stroke="none">
+                                                    <path d="M495 536 c-27 -12 -63 -34 -80 -48 -16 -13 -51 -32 -77 -42 -44 -16
+        -52 -16 -109 -2 -46 12 -70 14 -99 6 -64 -17 -74 -37 -81 -168 -4 -65 -10
+        -128 -14 -141 -7 -21 -6 -24 14 -18 17 4 25 0 33 -19 16 -34 41 -33 28 2 -13
+        32 -13 81 -1 89 5 3 12 -5 16 -17 19 -74 30 -98 42 -98 15 0 17 12 4 26 -5 5
+        -13 30 -19 56 -8 40 -6 52 14 95 13 26 25 51 26 56 2 4 21 -2 43 -13 21 -11
+        56 -20 77 -20 48 0 52 -10 39 -89 -11 -66 0 -111 26 -111 10 0 11 5 3 19 -12
+        24 -12 78 0 106 7 15 9 6 8 -32 -1 -32 4 -60 14 -75 19 -28 35 -19 17 10 -16
+        26 3 147 32 196 11 19 19 41 17 48 -5 21 33 98 49 98 7 0 30 -7 50 -15 44 -19
+        53 -19 53 0 0 12 -66 125 -73 125 -1 0 -24 -11 -52 -24z" />
+                                                </g>
+                                            </svg>
+                                            <span class="user-trajet">{{trajet.availableSits}}</span>
+                                        </div>
+                                        <button mat-raised-button color="primary" type="submit"
+                                        routerLink="/trajets/{{trajet.trajetId}}">
+                                            <mat-icon aria-hidden="false" aria-label="person_add icon">person_add
+                                            </mat-icon>
+                                            Réserver ce trajet
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <svg [ngClass]="
+                            'arrow arrow--left ' + (currentSlide === 0 ? 'arrow--disabled' : '')
+                          " (click)="this.slider.prev()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z" />
+                        </svg>
+                        <svg *ngIf="slider" [ngClass]="
+                            'arrow arrow--right ' +
+                            (slider.track.details.slides.length - 3 === currentSlide
+                              ? 'arrow--disabled'
+                              : '')
+                          " (click)="this.slider.next()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="trajets.length == 0">
+                <h3 class="empty-offer">{{userDetails.pseudo}} ne poccède aucune offres</h3>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="skeletton" *ngIf="userDetails == null">
+        <div class="skel-content">
+            <div class="skel-flex">
+                <div>
+                    <div class="skel-square"></div>
+                    <div class="skel-square"></div>
+                    <div class="skel-square"></div>
+                    <div class="skel-square"></div>
+                </div>
+                <div>
+                    <div class="skel-square"></div>
+                    <div class="skel-square"></div>
+                    <div class="skel-square"></div>
+                    <div class="skel-square"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

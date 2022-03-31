@@ -1,0 +1,43 @@
+.secondary-bar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-direction: row;
+    height: fit-content;
+}
+
+.mat-tab-group{
+    width: 100%;
+}
+
+.mat-toolbar-single-row{
+    padding: 0;
+}
+
+.form-inline{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    column-gap: 1em;
+    font-size: .8em;
+    margin: 7px;
+    
+}
+
+.mat-tab-body-content{
+    width: 80%;
+    margin: auto;
+}
+
+.btn-form-send{
+    margin-bottom: 5px;
+}
+
+.active-btn{
+    opacity: 1;
+    cursor: pointer;
+}

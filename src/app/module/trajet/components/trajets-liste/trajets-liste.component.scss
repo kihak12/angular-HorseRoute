@@ -1,0 +1,180 @@
+.container{
+    width: 80%;
+    margin: auto;
+    margin-left: calc(10% + 2em);
+    padding: 25px 0;
+
+    h2{
+        font-family: 'Fira Sans Condensed', sans-serif;
+    }
+    cursor: default;
+}
+
+.skeleton{
+    color:#fff;
+}
+.money-icon{
+    font-size: 1.3em;
+    line-height: 24px;
+    font-weight: 500;
+    mat-icon{
+        font-size: 22px;
+    }
+}
+
+.row {
+    margin-top: 2em;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+    align-content: center;
+    gap: 2em;
+}
+
+.item-row{
+    background-color: #fff;
+    border: #f0f0f0 1px solid;
+
+    position: relative;
+    width: 100%;
+    border-radius: 7px;
+    transition: .2s;
+}
+
+
+.card-flex{
+    display: flex;
+    flex-direction: row;
+}
+
+.user-pseudo{
+    white-space: nowrap;
+    width: fit-content;
+    padding: 3px 27px 3px 10px;
+
+    h3{
+        margin: 0;
+    }
+}    
+
+.absolute-card{
+    min-width: 30%;
+    box-shadow: 0 0 1px 1px rgba($color: #000000, $alpha: 0.1);
+    background-color: #fff;
+    border-radius: 7px;
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    transition: .2s;
+    color: #000000;
+    text-decoration: none;
+}
+.absolute-card:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 1px 3px 2px rgba($color: #000000, $alpha: 0.1);
+    background-color: #fff;
+}
+
+.card-body{
+    width: 100%;
+    height: 100%;
+    margin: .5em;
+    margin-top: 1.7em;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7px;
+    h3{
+        margin: 0;
+        line-height: 24px;
+    }
+}
+
+.item-row:hover{
+    box-shadow: 0 1px 3px 2px rgba($color: #000000, $alpha: 0.05);
+}
+
+.user-trajet{
+    font-size: 1.5em!important;
+}
+
+.trajet-text{
+    box-shadow: 0 1px 3px 2px rgba($color: #000000, $alpha: 0.05);
+    width: 60%;
+    margin: 5px auto 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding: .5em .3em .6em .3em;
+    border-radius: 7px;
+    text-align: center;
+    cursor: pointer;
+    h4{
+        margin: 0;
+    }
+}
+
+.h3-left{
+    margin-top: 1em!important;
+}
+
+.trajet-date{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    margin: 5px auto;
+
+    gap: 5px;
+
+    span{
+        font-size: 1.1em;
+    }
+}
+
+.btn-add{
+    margin: 1em;
+    display: flex;
+    justify-content: center;
+    button{
+        transition: .2s;
+    }
+}
+
+.btn-add button:hover{
+    transform: scale(1.02);
+}
+
+.skeleton-part{
+    width: 100%;
+}
+.skeleton{
+
+    height: 100%;
+    background-color: #f1f1f1;
+    color: #f1f1f1;
+    .user-pseudo h3{
+        color: #fff;
+    }
+    .trajet-text{
+        background-color: #f9f9f9;
+        color: #f9f9f9;
+    }
+
+    .absolute-card{
+        height: 30px;
+    }
+
+	animation: shine .5s infinite alternate;
+}
+@keyframes shine {
+    from {
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}

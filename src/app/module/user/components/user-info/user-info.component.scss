@@ -1,0 +1,241 @@
+.container{
+    width: 90%;
+    height: fit-content;
+    margin: 2em auto;
+    margin-bottom: 5em;
+}
+
+.profil-head{
+    h2{
+        font-family: "Fira Sans Condensed", sans-serif;
+        font-size: 1.8em;
+    }
+}
+
+.flex-left{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: .6em;
+    margin: 0 10px;
+}
+
+.flex-content{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    font-size: 1.2em;
+}
+
+.head-offre{
+    font-family: "Fira Sans Condensed", sans-serif;
+    font-size: 1.8em;
+}
+
+.icon-line{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.flex-right{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    align-content: flex-end;
+    text-align: end;
+    gap: .6em;
+}
+
+.icon-line-right{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.contact-details{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: flex-end;
+    margin-left: 2em;
+    gap: .2em;
+    text-align: end;
+}
+
+.slider-container{
+    width: 100%;
+    margin-top: 2em;
+}
+
+.slider{
+    overflow: auto;
+    white-space: nowrap;
+    .slider-item{
+        margin: 0 1em;
+        display: inline-block;
+    }
+}
+
+.skeletton{
+    opacity: 0.5;
+}
+
+.item-card{
+    background-color: #fff;
+    border: #f0f0f0 1px solid;
+    position: relative;
+    width: auto;
+    border-radius: 7px;
+    transition: 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    button{
+        margin-bottom: 10px;
+    }
+}
+
+.item-card:hover{
+    box-shadow: 0 1px 3px 2px rgb(0 0 0 / 10%);
+}
+
+.trajet-text{
+    box-shadow: 0 1px 3px 2px rgb(0 0 0 / 5%);
+    width: 60%;
+    margin: 10px auto 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding: 0.5em 0.3em 0.6em 0.3em;
+    border-radius: 7px;
+    text-align: center;
+    h4{
+        white-space: normal;
+    }
+}
+
+.trajet-date{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    margin: 5px 7px;
+
+    gap: 5px;
+
+    span{
+        font-size: 1.1em!important;
+    }
+}
+
+[class^="number-slide"],
+[class*=" number-slide"] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 500;
+  height: min-content;
+  padding: 10px;
+}
+
+
+.navigation-wrapper {
+  position: relative;
+}
+
+.arrow {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  fill: rgb(0, 0, 0);
+  cursor: pointer;
+}
+
+.arrow--left {
+  left: 5px;
+}
+
+.arrow--right {
+  left: auto;
+  right: 5px;
+}
+
+.arrow--disabled {
+  fill: rgba(85, 85, 85, 0.5);
+}
+
+.item-card{
+    color: #000;
+}
+
+.skel-content{
+    width: 100%;
+    height: 20em;
+    background-color: grey;
+	animation: shine2 .5s infinite alternate;
+}
+
+.skel-flex{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: flex-start;
+    align-items: flex-start;
+    div{
+        display: flex;
+        flex-direction: column;
+        gap: 2em;
+    }
+	animation: shine .5s infinite alternate;
+}
+
+.skel-square{
+    margin: 10px;
+    width: 10em;
+    height: 2em;
+    background-color: #f1f1f1;
+    border-radius: 7px;
+}
+
+.skel-slide{
+    background-color: #f1f1f1;
+    width: 100%;
+    height: 20em;
+	animation: shine .5s infinite alternate;
+}
+
+.empty-offer{
+    font-size: 1.2em;
+    margin: auto 2em;
+}
+@keyframes shine {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes shine2 {
+    from {
+        opacity: 0.5;
+    }
+    to {
+        opacity: 1;
+    }
+}

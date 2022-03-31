@@ -1,0 +1,70 @@
+<form class="form-inline" [formGroup]="trajetSearchForm" (ngSubmit)="onClickSubmit(trajetSearchForm.value)">
+    <div class="flex-details">
+        <div class="flex-details-item">
+
+            <mat-form-field class="example-full-width" class="input-location" appearance="legacy">
+                <mat-label>Départ</mat-label>
+                <input matInput type="text" aria-label="Départ" (ngModelChange)="SearchLocation($event, 'depart')"
+                    [matAutocomplete]="auto" formControlName="depart" placeholder="Ex. Paris">
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let location of locations" [value]="location.info">
+                        <small>{{location.info}}</small>
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+
+        </div>
+    </div>
+    <div class="flex-details">
+        <div class="flex-details-item">
+            <mat-form-field class="example-full-width" class="input-location" appearance="legacy">
+                <mat-label>Arriver</mat-label>
+                <input matInput type="text" aria-label="Arriver" (ngModelChange)="SearchLocation($event, 'arriver')"
+                    [matAutocomplete]="auto" formControlName="arriver" placeholder="Ex. Lyon">
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option type="text" *ngFor="let location of locations"
+                        [value]="location.info">
+                        <small>{{location.info}}</small>
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+
+        </div>
+    </div>
+    <div class="flex-details">
+        <div class="flex-details-item">
+            <mat-form-field class="example-full-width" color="secondary">
+                <mat-label>A la date</mat-label>
+                <input matInput [min]="minDate" [matDatepicker]="picker" formControlName="date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="flex-details">
+        <div class="flex-details-item">
+            <mat-form-field>
+                <mat-label>Flexibilité de la date</mat-label>
+                <mat-select [(value)]="selected" disableRipple formControlName="flexibiliter">
+                    <mat-option value="3days">3 jours, plus ou moins</mat-option>
+                    <mat-option value="1week">1 semaine,plus ou moins</mat-option>
+                    <mat-option value="2week">2 semaines plus ou moins</mat-option>
+                    <mat-option value="3week">3 semaines,plus ou moins</mat-option>
+                    <mat-option value="1month">1 mois, plus ou moins</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="flex-details">
+        <div class="flex-details-item">
+            <div class="btn-form-send">
+                <button mat-raised-button color="primary" type="submit">
+                    <mat-icon aria-hidden="false" aria-label="search icon">search</mat-icon>
+                    Rechercher
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="map" #map></div>

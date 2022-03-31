@@ -1,0 +1,98 @@
+<app-search-bar></app-search-bar>
+<div class="container">
+    <div *ngIf="trajetDetails != null">
+        <div class="profil-head">
+            <h2>Détails du trajet :</h2>
+        </div>
+        <div class="card-body">
+            <div class="left-card">
+                <h3>Date du trajet :</h3>
+                <div class="trajet-date">
+                    <mat-icon aria-hidden="false" aria-label="today icon">today</mat-icon>
+                    <div *ngIf="trajetDetails.dayFlexibility == 0">
+                        <span>Le {{trajetDetails.trajetDate | date:'dd MMMM yyyy':'+0200':'fr'}}</span>
+                    </div>
+                    <div *ngIf="trajetDetails.dayFlexibility != 0">
+                        <span>Du {{getDateFlexibility(trajetDetails.trajetDate, trajetDetails.dayFlexibility)}}</span>
+                    </div>
+                </div>
+                <h3 class="h3-left">Nombre de place(s) :</h3>
+                <div class="trajet-date">
+                    <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="32px" height="32px" viewBox="0 0 64 64"
+                        preserveAspectRatio="xMidYMid meet">
+                        <metadata>
+                            Created by potrace 1.15, written by Peter Selinger 2001-2017
+                        </metadata>
+                        <g transform="translate(0.000000,64.000000) scale(0.100000,-0.100000)" fill="#000000"
+                            stroke="none">
+                            <path d="M495 536 c-27 -12 -63 -34 -80 -48 -16 -13 -51 -32 -77 -42 -44 -16
+-52 -16 -109 -2 -46 12 -70 14 -99 6 -64 -17 -74 -37 -81 -168 -4 -65 -10
+-128 -14 -141 -7 -21 -6 -24 14 -18 17 4 25 0 33 -19 16 -34 41 -33 28 2 -13
+32 -13 81 -1 89 5 3 12 -5 16 -17 19 -74 30 -98 42 -98 15 0 17 12 4 26 -5 5
+-13 30 -19 56 -8 40 -6 52 14 95 13 26 25 51 26 56 2 4 21 -2 43 -13 21 -11
+56 -20 77 -20 48 0 52 -10 39 -89 -11 -66 0 -111 26 -111 10 0 11 5 3 19 -12
+24 -12 78 0 106 7 15 9 6 8 -32 -1 -32 4 -60 14 -75 19 -28 35 -19 17 10 -16
+26 3 147 32 196 11 19 19 41 17 48 -5 21 33 98 49 98 7 0 30 -7 50 -15 44 -19
+53 -19 53 0 0 12 -66 125 -73 125 -1 0 -24 -11 -52 -24z" />
+                        </g>
+                    </svg>
+                    <span class="user-trajet">{{trajetDetails.availableSits}}</span>
+                </div>
+                <h3 class="h3-left">Place(s) disponible :</h3>
+                <div class="trajet-date">
+                    <span class="user-trajet">{{availableSits}}</span>
+                </div>
+                <h3 class="h3-left">Prix :</h3>
+                <div class="trajet-date money-icon">
+                    <span>{{trajetDetails.price}}</span>
+                    <mat-icon aria-hidden="false" aria-label="euro_symbol icon">euro_symbol</mat-icon>
+                </div>
+                <div class="btn-add mt-2">
+                    <button mat-raised-button color="primary" type="submit" [disabled]="btnIsDisabled"
+                        routerLink="/trajets/{{trajetDetails.trajetId}}">
+                        <mat-icon aria-hidden="false" aria-label="person_add icon">person_add</mat-icon>
+                        Réserver ce trajet
+                    </button>
+                </div>
+            </div>
+            <div class="right-card">
+                <div class="head-card">
+                    <h3>Adresse de départ et destination :</h3>
+                    <div class="trajet-text">
+                        <h4>{{trajetDetails.adresseStart.adresse}}, {{trajetDetails.adresseStart.city}},
+                            {{trajetDetails.adresseStart.country}}</h4>
+                        <mat-icon aria-hidden="false" aria-label="south icon">south</mat-icon>
+                        <h4>{{trajetDetails.adresseEnd.adresse}}, {{trajetDetails.adresseEnd.city}},
+                            {{trajetDetails.adresseEnd.country}}</h4>
+                    </div>
+                </div>
+                <h3>Description :</h3>
+                <div class="trajet-desc">
+                    <p>{{trajetDetails.description}}</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="skeletton" *ngIf="trajetDetails == null">
+        <div class="skel-content">
+            <div class="skel-flex">
+                <div>
+                    <div class="skel-square"></div>
+                    <div class="skel-square"></div>
+                    <div class="skel-square"></div>
+                    <div class="skel-square"></div>
+                </div>
+                <div>
+                    <div class="skel-square"></div>
+                    <div class="skel-square"></div>
+                    <div class="skel-square"></div>
+                    <div class="skel-square"></div>
+                </div>
+            </div>
+        </div>
+        <div class="skel-slide"></div>
+    </div>
+</div>
