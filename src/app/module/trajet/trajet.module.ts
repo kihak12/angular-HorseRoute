@@ -7,11 +7,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TrajetInfoComponent } from './components/trajet-info/trajet-info.component';
 import { MapModule } from '../map/map.module';
 import { AppRoutingModule } from 'src/app/app-routing.module';
+import { TrajetSearchComponent } from './components/trajet-search/trajet-search.component';
 
 @NgModule({
   declarations: [
     TrajetsListeComponent,
     TrajetInfoComponent,
+    TrajetSearchComponent,
   ],
   imports: [
     BrowserModule,

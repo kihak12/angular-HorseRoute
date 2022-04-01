@@ -5,7 +5,9 @@ import * as mapboxgl from 'mapbox-gl';
 import { MapService } from '../../service/map.service';
 import { Location } from '../../interface/map.interface';
 import Swal from 'sweetalert2';
-import { debounceTime, Subject, switchMap } from 'rxjs';
+import { Subject } from 'rxjs';
+import { Router } from '@angular/router';
+import { NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-search-map',
@@ -28,6 +30,7 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
   constructor(
     private formBuilder: FormBuilder,
     private mapService: MapService,
+    private router: Router
   ) {
     this.minDate = new Date();
   }
@@ -41,13 +44,21 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
 
   onClickSubmit(data: any) {
     if (this.trajetSearchForm.valid) {
-      /// search trajet
-      /// TODO
       let f = JSON.stringify(this.route);
 
-      f = f.replace(/\],\[/g,"rep").replace(/\[/g,"").replace(/\]/g,"").replace(/,/g,"&!&").replace(/rep/g, ",");
+      f = f.replace(/\],\[/g, "rep").replace(/\[/g, "").replace(/\]/g, "").replace(/,/g, "&!&").replace(/rep/g, ",");
 
-      console.log(f);
+      this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+        this.router.navigate(['/trajets/search'], {
+          state: {
+            depart: this.trajetSearchForm.value.depart,
+            arriver: this.trajetSearchForm.value.arriver,
+            location: f,
+            date: this.trajetSearchForm.value.date,
+            flexibility: this.trajetSearchForm.value.flexibiliter
+          }
+        });
+      });
     }
   }
 
@@ -131,7 +142,7 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
     const llb = new mapboxgl.LngLatBounds(LngLat[0], LngLat[1]);
     llb.getCenter();
     this.map.fitBounds(llb, {
-      padding: { top: 40, bottom: 15, left: 25, right: 40 },
+      padding: { top: 40, bottom: 15, left: 50, right: 50 },
       speed: 1,
       curve: 3,
       easing(t) {

@@ -34,7 +34,6 @@ export class TrajetsListeComponent implements OnInit {
       trajets.forEach((element: Trajet) => {
         this.trajetService.getTrajetDetails(element.trajetId).subscribe(a => {
           this.trajets.push(a);
-          console.log(a);
         });
       });
     });

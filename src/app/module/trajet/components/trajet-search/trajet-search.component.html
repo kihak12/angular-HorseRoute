@@ -1,0 +1,142 @@
+<app-search-bar></app-search-bar>
+
+<div class="container">
+    <div *ngIf="data != null">
+        <h2>Trajet(s) correspondant à :</h2>
+        <h3 class="trajet-head-dest">
+            {{data.depart}}
+            <mat-icon aria-hidden="false" aria-label="east icon">east</mat-icon>
+            {{data.arriver}}
+        </h3>
+
+
+        <div class="row">
+            <div class="item" *ngFor="let trajet of trajets">
+                <div class="item-row">
+                    <div class="card-flex">
+                        <a class="absolute-card" routerLink="/users/{{trajet.driverUser.userId}}">
+                            <div class="user-pseudo">
+                                <h3>Posté par {{trajet.driverUser.pseudo}}</h3>
+                            </div>
+                        </a>
+                        <div class="card-body">
+                            <div class="left-card">
+                                <h3>Date du trajet :</h3>
+                                <div class="trajet-date">
+                                    <mat-icon aria-hidden="false" aria-label="today icon">today</mat-icon>
+                                    <div *ngIf="trajet.dayFlexibility == 0">
+                                        <span>Le {{trajet.trajetDate | date:'dd MMMM yyyy':'+0200':'fr'}}</span>
+                                    </div>
+                                    <div *ngIf="trajet.dayFlexibility != 0">
+                                        <span>Du {{getDateFlexibility(trajet.trajetDate, trajet.dayFlexibility)}}</span>
+                                    </div>
+                                </div>
+                                <h3 class="h3-left">Nombre de place(s) :</h3>
+                                <div class="trajet-date">
+                                    <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="32px" height="32px"
+                                        viewBox="0 0 64 64" preserveAspectRatio="xMidYMid meet">
+                                        <metadata>
+                                            Created by potrace 1.15, written by Peter Selinger 2001-2017
+                                        </metadata>
+                                        <g transform="translate(0.000000,64.000000) scale(0.100000,-0.100000)"
+                                            fill="#000000" stroke="none">
+                                            <path d="M495 536 c-27 -12 -63 -34 -80 -48 -16 -13 -51 -32 -77 -42 -44 -16
+    -52 -16 -109 -2 -46 12 -70 14 -99 6 -64 -17 -74 -37 -81 -168 -4 -65 -10
+    -128 -14 -141 -7 -21 -6 -24 14 -18 17 4 25 0 33 -19 16 -34 41 -33 28 2 -13
+    32 -13 81 -1 89 5 3 12 -5 16 -17 19 -74 30 -98 42 -98 15 0 17 12 4 26 -5 5
+    -13 30 -19 56 -8 40 -6 52 14 95 13 26 25 51 26 56 2 4 21 -2 43 -13 21 -11
+    56 -20 77 -20 48 0 52 -10 39 -89 -11 -66 0 -111 26 -111 10 0 11 5 3 19 -12
+    24 -12 78 0 106 7 15 9 6 8 -32 -1 -32 4 -60 14 -75 19 -28 35 -19 17 10 -16
+    26 3 147 32 196 11 19 19 41 17 48 -5 21 33 98 49 98 7 0 30 -7 50 -15 44 -19
+    53 -19 53 0 0 12 -66 125 -73 125 -1 0 -24 -11 -52 -24z" />
+                                        </g>
+                                    </svg>
+                                    <span class="user-trajet">{{trajet.availableSits}}</span>
+                                </div>
+                                <h3 class="h3-left">Prix :</h3>
+                                <div class="trajet-date money-icon">
+                                    <span>{{trajet.price}}</span>
+                                    <mat-icon aria-hidden="false" aria-label="euro_symbol icon">euro_symbol</mat-icon>
+                                </div>
+                                <div class="btn-add">
+                                    <button mat-raised-button color="primary" type="submit" routerLink="/trajets/{{trajet.trajetId}}">
+                                        <mat-icon aria-hidden="false" aria-label="manage_search icon">manage_search</mat-icon>
+                                        Consulté ce trajet
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="right-card">
+                                <div class="head-card">
+                                    <div class="trajet-text"
+                                        (click)="SetPointOnMap(trajet.adresseStart, trajet.adresseEnd)">
+                                        <h3>Ce trajet passe par votre demande</h3>
+                                    </div>
+                                </div>
+    
+                                <mat-accordion>
+                                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                                        <mat-expansion-panel-header>
+                                            <mat-panel-title>
+                                                Description
+                                            </mat-panel-title>
+                                        </mat-expansion-panel-header>
+                                        <p>{{trajet.description}}</p>
+                                    </mat-expansion-panel>
+                                </mat-accordion>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div *ngIf="trajetFound == false">
+                <h2>Il n'existe aucun itinéraire pour ce trajet</h2>
+            </div>
+
+            <div *ngIf="trajets.length == 0 && trajetFound == true" class="skeleton-part">
+                <div class="item-row">
+                    <div class="card-flex skeleton">
+                        <div class="absolute-card">
+                            <div class="user-pseudo">
+                                <h3></h3>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="left-card">
+                                <h3></h3>
+                                <div class="trajet-date">
+                                    <mat-icon aria-hidden="false" aria-label="today icon">today</mat-icon>
+                                    <span></span>
+                                </div>
+                                <h3 class="h3-left"></h3>
+                                <div class="trajet-date">
+                                    <mat-icon aria-hidden="false" aria-label="people icon"></mat-icon>
+                                    <span class="user-trajet"></span>
+                                </div>
+                                <h3 class="h3-left"></h3>
+                                <div class="trajet-date money-icon">
+                                    <span></span>
+                                    <mat-icon aria-hidden="false" aria-label="euro_symbol icon">euro_symbol</mat-icon>
+                                </div>
+                                <div class="btn-add">
+                                </div>
+                            </div>
+                            <div class="right-card">
+                                <div class="head-card">
+                                    <h3></h3>
+                                    <div class="trajet-text">
+                                        <h4></h4>
+                                        <mat-icon aria-hidden="false" aria-label="south icon">south</mat-icon>
+                                        <h4></h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

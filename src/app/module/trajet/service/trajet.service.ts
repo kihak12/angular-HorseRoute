@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import Swal from 'sweetalert2';
 
 import { Observable, throwError } from 'rxjs';
@@ -20,6 +19,18 @@ export class TrajetService {
   getAllTrajets(): Observable<any> {
     const url = this.apiUrl + "trajets/"
     return this.http.get<Trajet[]>(url).pipe(
+      catchError(err => err)
+    );
+  }
+
+  getTrajetsSearch(search: any): Observable<any> {
+    const url = this.apiUrl + "trajets/search";
+    var request = {
+      locations: search.location,
+      trajetDate: search.date,
+      dayFlexibility: search.flexibility,
+    }
+    return this.http.post(url, request).pipe(
       catchError(err => this.catchAuthError(err))
     );
   }
@@ -43,8 +54,8 @@ export class TrajetService {
     return result;
   }
 
-  catchAuthError(error: any): Observable<Response>{
-    if (error){
+  catchAuthError(error: any): Observable<Response> {
+    if (error) {
       Swal.fire({
         title: 'Impossible d\'accéder à la base de donnée.',
         icon: 'error',
