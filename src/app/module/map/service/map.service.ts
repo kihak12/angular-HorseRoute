@@ -12,7 +12,7 @@ import { Location } from '../interface/map.interface';
 })
 export class MapService {
 
-    apiKey = "pk.eyJ1Ijoia2loYWsiLCJhIjoiY2wxMHU2MDhxMDF3cTNqcDY2MXd6ODF0ZSJ9.S2dBh1zmZiG8oPArCXfyyQ";
+    apiKey = "";
 
 
     geocodingApiDirection = "https://api.mapbox.com/directions/v5/mapbox/driving"

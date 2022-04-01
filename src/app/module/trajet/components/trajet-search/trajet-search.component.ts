@@ -14,7 +14,7 @@ export class TrajetSearchComponent implements OnInit {
   trajets: Trajet[] = [];
   data: any;
   panelOpenState = false;
-  trajetFound= true;
+  trajetFound = true;
 
   @ViewChild(SearchBarComponent, { static: true }) child: SearchBarComponent;
 
@@ -35,20 +35,20 @@ export class TrajetSearchComponent implements OnInit {
   ngOnInit(): void {
     if (this.data != null) {
       this.trajetService.getTrajetsSearch(this.data)
-      .subscribe(
-        trajets => {
-          trajets.forEach((element: Trajet) => {
-            this.trajetService.getTrajetDetails(element.trajetId).subscribe(a => {
-              this.trajets.push(a);
-              console.log("response a:", a);
+        .subscribe(
+          trajets => {
+            trajets.forEach((element: Trajet) => {
+              this.trajetService.getTrajetDetails(element.trajetId).subscribe(a => {
+                this.trajets.push(a);
+                console.log("response a:", a);
+              });
             });
-          });
-        },
-        error => {
-          this.trajetFound = false;
-        }
-      )
-    }else{
+          },
+          error => {
+            this.trajetFound = false;
+          }
+        )
+    } else {
       this.route.navigate(["/trajets"]);
     }
 
@@ -57,5 +57,4 @@ export class TrajetSearchComponent implements OnInit {
   getDateFlexibility(trajetDate: string, dayFlexibility: number): string {
     return this.trajetService.getDateFlexibility(trajetDate, dayFlexibility)
   }
-
 }
