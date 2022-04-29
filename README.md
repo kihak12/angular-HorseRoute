@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Postman Collections
 
-Get Postman COllection link : 
+Get Postman Collection link : 
 https://go.postman.co/workspace/My-Workspace~afc15969-8773-4356-8954-b8e8d3a1ce6b/collection/18215830-8768460a-c1e3-45b8-9d44-667386700cd0?action=share&creator=18215830
 
 ## Development server
